@@ -1,0 +1,54 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Build with Clang",
+        "type": "shell",
+        "command": "clang",
+        "args": [
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "libmx.a",
+            "src/print.c",
+            "src/nonprintables.c",
+            "src/fts.c",
+            "src/ls.c",
+            "src/mx_getopt.c",
+            "src/mx_parse_flags.c",
+            "src/mx_bBcClqtTuUvwx1.c",
+            "src/mx_printlong.c",
+            "src/mx_printtime.c",
+            "src/mx_printtype.c",
+            "src/mx_printsize.c",
+            "src/mx_printcol.c",
+            "src/color.c",
+            "src/util.c",
+            "src/util1.c",
+            "src/util2.c",
+            "src/util3.c",
+            "src/util4.c",
+            "src/util5.c",
+            "src/util6.c",
+            "src/util7.c",
+            "src/util8.c",
+            "src/fts_children.c",
+            "src/mx_sort_fts_chlist.c",
+            "src/birth_size_cmp.c",
+            "src/acc_stat_cmp.c",
+            "src/name_mod_str_cmp.c",
+            "src/mx_display.c",
+            "src/display1.c",
+            "src/mx_traverse.c",
+            "-o",
+            "uls",
+            "--debug"
+        ],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        }
+      }
+    ]
+  }
+  

@@ -1,0 +1,28 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(lldb)launch",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/uls",
+            "args": [
+                // "-lT",
+                // "/dev/autofs_nowait", "/dev/zero", "/dev/xcpm", "/dev/ttywe",
+                // "/dev/stderr", "/dev/disk0", "/dev/", 
+                // "/Users/mac/Downloads/Final_Cut_Pro_10.4.8.dmg"
+                
+                
+                
+                
+                
+                
+                
+                ],
+            "cwd": "${workspaceFolder}",
+        }
+    ]
+}

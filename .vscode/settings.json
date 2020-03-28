@@ -1,0 +1,28 @@
+{
+    "editor.rulers": [
+        79
+    ],
+    "liveServer.settings.donotVerifyTags": true,
+    "liveServer.settings.donotShowInfoMsg": true,
+    "emmet.showSuggestionsAsSnippets": true,
+    "emmet.triggerExpansionOnTab": true,
+    "html-css-class-completion.enableEmmetSupport": true,
+    "editor.formatOnType": true,
+    "javascript.format.placeOpenBraceOnNewLineForFunctions": true,
+    "typescript.format.insertSpaceAfterTypeAssertion": true,
+    "editor.hideCursorInOverviewRuler": true,
+    "zenMode.restore": true,
+
+    "files.associations": {
+        "libmx.h": "c",
+        "cstdlib": "c",
+        "cstring": "c",
+        "locale": "c",
+        "uls.h": "c",
+        "stat.h": "c",
+        "termcap.h": "c",
+        "__config": "c",
+        "xattr.h": "c",
+        "param.h": "c"
+    }
+}
