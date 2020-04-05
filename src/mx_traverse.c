@@ -1,33 +1,33 @@
 #include "../inc/uls.h"
 
 static void choose_rev_sortfcn(bool (**sortfcn)(void *, void *), t_flags *f) {
-	if (f->sizesort)
-		*sortfcn = mx_revsizecmp;
-	else if (!f->timesort)
-		*sortfcn = mx_revnamecmp;
-	else if (f->accesstime)
-		*sortfcn = mx_revacccmp;
-	else if (f->statustime)
-		*sortfcn = mx_revstatcmp;
-	else if (f->birthtime)
-		*sortfcn = mx_revbirthcmp;
-	else		/* Use modification time. */
-		*sortfcn = mx_revmodcmp;
+    if (f->sizesort)
+        *sortfcn = mx_revsizecmp;
+    else if (!f->timesort)
+        *sortfcn = mx_revnamecmp;
+    else if (f->accesstime)
+        *sortfcn = mx_revacccmp;
+    else if (f->statustime)
+        *sortfcn = mx_revstatcmp;
+    else if (f->birthtime)
+        *sortfcn = mx_revbirthcmp;
+    else        /* Use modification time. */
+        *sortfcn = mx_revmodcmp;
 }
 
 static void choose_sortfcn(bool (**sortfcn)(void *, void *), t_flags *f) {
-	if (f->sizesort)
-		*sortfcn = mx_sizecmp;
-	else if (!f->timesort)
-		*sortfcn = mx_namecmp;
-	else if (f->accesstime)
-		*sortfcn = mx_acccmp;
-	else if (f->statustime)
-		*sortfcn = mx_statcmp;
-	else if (f->birthtime)
-		*sortfcn = mx_birthcmp;
-	else		/* Use modification time. */
-		*sortfcn = mx_modcmp;
+    if (f->sizesort)
+        *sortfcn = mx_sizecmp;
+    else if (!f->timesort)
+        *sortfcn = mx_namecmp;
+    else if (f->accesstime)
+        *sortfcn = mx_acccmp;
+    else if (f->statustime)
+        *sortfcn = mx_statcmp;
+    else if (f->birthtime)
+        *sortfcn = mx_birthcmp;
+    else        /* Use modification time. */
+        *sortfcn = mx_modcmp;
 }
 
 static void not_root_dir(int argc, int options, t_file *p, t_flags *f) {
@@ -65,32 +65,32 @@ static void switch_p_info(int argc, int options, t_file *p, t_flags *f) {
 }
 
 /*
- * mx_traverse() walks the logical directory structure specified by 
+ * mx_traverse() walks the logical directory structure specified by
  * the argv list
- * in the order specified by the mastercmp() comparison function.  
+ * in the order specified by the mastercmp() comparison function.
  * During the
- * traversal it passes linked lists of structures to display() which 
+ * traversal it passes linked lists of structures to display() which
  * represent
  * a superset (may be exact set) of the files to be displayed.
  */
 t_fts *mx_traverse(int argc, char *argv[], int options, t_flags *f) {
-	t_fts *ftsp;
-	t_file *p;
-	bool (*sortfcn)(void *, void *);
+    t_fts *ftsp;
+    t_file *p;
+    bool (*sortfcn)(void *, void *);
 
-	if (f->reversesort)
-		choose_rev_sortfcn(&sortfcn, f);
-	else
-		choose_sortfcn(&sortfcn, f);
-	if ((ftsp =
-	    mx_fts_open(argv, options, f->nosort ? NULL : sortfcn)) == NULL)
-		mx_printerr_errnum("mx_fts_open", errno);
+    if (f->reversesort)
+        choose_rev_sortfcn(&sortfcn, f);
+    else
+        choose_sortfcn(&sortfcn, f);
+    if ((ftsp =
+        mx_fts_open(argv, options, f->nosort ? NULL : sortfcn)) == NULL)
+        mx_printerr_errnum("mx_fts_open", errno);
     f->ftsp = ftsp;
     mx_display(NULL, mx_fts_children(ftsp, options), f);
     if (f->listdir)
-		return ftsp;
+        return ftsp;
 
-	while ((p = mx_fts_read(ftsp)) != NULL)
+    while ((p = mx_fts_read(ftsp)) != NULL)
         switch_p_info(argc, options, p, f);
     return ftsp;
 }

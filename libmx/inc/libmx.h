@@ -4,8 +4,8 @@
 #include <malloc/malloc.h>
 #include <unistd.h>
 #include <stdbool.h>
-#include <fcntl.h> 
-#include <errno.h> 
+#include <fcntl.h>
+#include <errno.h>
 #include <sys/types.h>
 #include <limits.h>
 #include <sys/cdefs.h>

@@ -31,13 +31,13 @@ t_file *mx_dirent_to_ftsent(t_file *p, struct dirent *stdp, int options) {
         np->par_pathlen = p->accpathlen + 1;
         mx_strcpy(np->accpath, np->par_path);
         mx_strcpy(np->accpath + np->par_pathlen, np->name);
-        np->accpathlen = np->par_pathlen + np->namelen; 
+        np->accpathlen = np->par_pathlen + np->namelen;
     }
     np->parent = p;
     np->level = p->level + 1;
     np->d_type = stdp->d_type;
     np->info = mx_fts_dirent_info(stdp, np->accpath, options);
-    stsp = malloc(sizeof(struct stat)); 
+    stsp = malloc(sizeof(struct stat));
     if (np->info == MX_SLNONE)
         lstat(np->accpath, stsp);
     else

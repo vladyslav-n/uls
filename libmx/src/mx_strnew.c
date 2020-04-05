@@ -4,10 +4,9 @@ char *mx_strnew(const int size) {
     if (size >= 0) {
         char *str = (char*) malloc(size + 1);
 
-        for (int i = 0; i <= size; i++) 
+        for (int i = 0; i <= size; i++)
             str[i] = '\0';
         return str;
     }
     return NULL;
 }
-

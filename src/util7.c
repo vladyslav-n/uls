@@ -3,6 +3,7 @@
 ssize_t mx_xattr_size(t_flags *f, t_file *file) {
     int xattropt = (file->level == MX_ROOTLEV && f->comfollow)
         || f->lfollow ? 0 : XATTR_NOFOLLOW;
+        
     return listxattr(file->accpath, NULL, 0, xattropt);
 }
 

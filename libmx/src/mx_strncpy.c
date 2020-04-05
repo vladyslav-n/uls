@@ -16,4 +16,3 @@ char *mx_strncpy(char *dst, const char *src, int len) {
         return dst;
     }
 }
-

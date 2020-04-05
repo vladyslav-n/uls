@@ -2,7 +2,7 @@
 
 static void swap_nodes(t_list **n1, t_list **n2) {
     t_list *tmp;
-    
+
     tmp = *n1;
     *n1 = *n2;
     *n2 = tmp;
@@ -15,7 +15,7 @@ int left, int right) {
     void *pivot = list[(left + right) / 2]->data;
 
     while (i <= j) {
-        while ((*cmp)(pivot, list[i]->data)) 
+        while ((*cmp)(pivot, list[i]->data))
             i++;
         while ((*cmp)(list[j]->data, pivot))
             j--;
@@ -53,4 +53,3 @@ t_list *mx_sort_list(t_list *lst, bool (*cmp)(void *, void *)) {
     arr = NULL;
     return save;
 }
-

@@ -7,5 +7,3 @@ size_t mx_strlen_size_t(const char *s) {
         i++;
     return i;
 }
-
-

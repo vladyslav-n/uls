@@ -35,4 +35,3 @@ char *mx_file_to_str(const char *file) {
         return s;
     return NULL;
 }
-

@@ -15,4 +15,3 @@ void mx_clear_list(t_list **head) {
     free(*head);
     *head = NULL;
 }
-

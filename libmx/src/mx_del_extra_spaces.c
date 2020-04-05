@@ -7,7 +7,7 @@ static void skip_spaces(const char *str, int *i) {
 }
 
 static void skip_spaces_ncount(const char *str, int *i, int *count) {
-    for (; mx_isspace(str[*i]); (*i)++) 
+    for (; mx_isspace(str[*i]); (*i)++)
         *count += 1;
 }
 
@@ -54,4 +54,3 @@ char *mx_del_extra_spaces(const char *str) {
     free(s);
     return fin;
 }
-

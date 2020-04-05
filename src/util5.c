@@ -1,12 +1,12 @@
 #include "../inc/uls.h"
 
 void mx_usage(void) {
-	mx_printerror("usage: uls [-" MX_FL_USAGE "] [file ...]\n");
-	exit(1);
+    mx_printerror("usage: uls [-" MX_FL_USAGE "] [file ...]\n");
+    exit(1);
 }
 
 short mx_round(int n) {
-	return n % 10 >= 5 ? ((n / 10) % 10) + 1 : (n / 10) % 10;
+    return n % 10 >= 5 ? ((n / 10) % 10) + 1 : (n / 10) % 10;
 }
 
 void mx_printerr_errnum(char *s, int errnum) {

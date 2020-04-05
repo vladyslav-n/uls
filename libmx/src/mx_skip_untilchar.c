@@ -5,4 +5,3 @@ void mx_skip_untilchar(const char *str, char c, int *i) {
         (*i)++;
     }
 }
-

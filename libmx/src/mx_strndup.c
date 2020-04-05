@@ -4,7 +4,7 @@ static char *strnew_size_t(size_t size) {
     if (size >= 0) {
         char *str = (char*) malloc(size + 1);
 
-        for (size_t i = 0; i <= size; i++) 
+        for (size_t i = 0; i <= size; i++)
             str[i] = '\0';
         return str;
     }
@@ -40,7 +40,7 @@ static char *strncpy_size_t(char *dst, const char *src, size_t len) {
 
 static char *strdup_size_t(const char *str)  {
     char *str1 = strnew_size_t(mx_strlen_size_t(str));
-    
+
     return strcpy_size_t(str1, str);
 }
 
@@ -50,6 +50,6 @@ char *mx_strndup(const char *s1, size_t n) {
     if (n >= mx_strlen_size_t(s1))
         return strdup_size_t(s1);
     dst = strnew_size_t(n);
-    return strncpy_size_t(dst, s1, n); 
+    return strncpy_size_t(dst, s1, n);
 }
 

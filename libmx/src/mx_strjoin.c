@@ -2,7 +2,7 @@
 
 char *mx_strjoin(const char *s1, const char *s2) {
     char *str = NULL;
-    
+
     if (!s1 && !s2)
         return NULL;
     if (!s1 && s2)
@@ -14,4 +14,3 @@ char *mx_strjoin(const char *s1, const char *s2) {
     str = mx_strcat(str, s2);
     return str;
 }
-

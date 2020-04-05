@@ -21,4 +21,3 @@ char **mx_strsplit(const char *s, char c) {
     }
     return arr;
 }
-

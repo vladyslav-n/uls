@@ -2,7 +2,7 @@
 
 int mx_get_char_index(const char *str, char c) {
     int len = -1;
-    
+
     if (!str)
         return -2;
     len = mx_strlen(str);
@@ -11,4 +11,3 @@ int mx_get_char_index(const char *str, char c) {
             return i;
     return -1;
 }
-

@@ -8,4 +8,3 @@ char *mx_strcpy(char *dst, const char *src) {
     dst[i] = src[i];
     return dst;
 }
-

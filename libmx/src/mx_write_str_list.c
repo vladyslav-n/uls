@@ -15,4 +15,3 @@ void mx_write_str_list(t_list *strlist, int str_sum_len, char **lineptr) {
         strlist = strlist->next;
     }
 }
-

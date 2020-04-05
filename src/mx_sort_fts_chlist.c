@@ -2,7 +2,7 @@
 
 static void swap_nodes(t_file **n1, t_file **n2) {
     t_file *tmp;
-    
+
     tmp = *n1;
     *n1 = *n2;
     *n2 = tmp;
@@ -15,7 +15,7 @@ int left, int right) {
     void *pivot = list[(left + right) / 2];
 
     while (i <= j) {
-        while ((*cmp)(pivot, list[i])) 
+        while ((*cmp)(pivot, list[i]))
             i++;
         while ((*cmp)(list[j], pivot))
             j--;

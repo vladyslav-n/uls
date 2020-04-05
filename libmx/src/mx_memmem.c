@@ -1,7 +1,7 @@
 #include "../inc/libmx.h"
 
 static bool is_submem(const void *big, size_t big_len,
-const void *little, size_t little_len) {
+                      const void *little, size_t little_len) {
     unsigned char *needle = (unsigned char *)little;
     unsigned char *haystack = (unsigned char *)big;
 
@@ -14,7 +14,7 @@ const void *little, size_t little_len) {
 }
 
 void *mx_memmem(const void *big, size_t big_len,
-const void *little, size_t little_len) {
+                const void *little, size_t little_len) {
     unsigned char *needle = (unsigned char *)little;
     unsigned char *haystack = (unsigned char *)big;
     size_t biglen_save = big_len;
@@ -28,4 +28,3 @@ const void *little, size_t little_len) {
             return (void*)--haystack;
     return NULL;
 }
-

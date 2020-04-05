@@ -45,7 +45,7 @@ t_delim *del, t_read_bytes *bytes) {
         }
     }
     if (!bytes->res) {
-        if (!tail->s[0]) 
+        if (!tail->s[0])
             bytes->res = -1;
         else
             at_eof(tmp, tail, del, bytes);
@@ -79,4 +79,3 @@ int mx_read_line(char **lineptr, size_t buf_size, char delim, const int fd) {
     clear(&(bytes.buffer), &(tmp.strlist));
     return bytes.res;
 }
-

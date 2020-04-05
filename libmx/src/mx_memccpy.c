@@ -1,7 +1,7 @@
 #include "../inc/libmx.h"
 
 void *mx_memccpy(void *restrict dst, const void *restrict src,
-int c, size_t n) {
+                 int c, size_t n) {
     unsigned char *d = dst;
     unsigned char *s = (unsigned char *)src;
 
@@ -14,4 +14,3 @@ int c, size_t n) {
     }
     return NULL;
 }
-

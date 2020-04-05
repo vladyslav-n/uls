@@ -1,14 +1,14 @@
 #include "../inc/uls.h"
 
-static void FGmnp(char c, t_flags *f) {
-    if (c == 'G')
-        f->color = 1;
-    else if (c == 'F') {
+static void AFmnp(char c, t_flags *f) {
+    if (c == 'F') {
         f->type = 1;
         f->slash = 0;
     }
-    else if (c == 'n')
+    else if (c == 'n') {
         f->numericonly = 1;
+        f->longform = 1;
+    }
     else if (c == 'p') {
         f->slash = 1;
         f->type = 1;
@@ -18,9 +18,13 @@ static void FGmnp(char c, t_flags *f) {
         f->singlecol = 0;
         f->longform = 0;
     }
+    else if (c == 'A')
+        f->listdot = 1;
 }
 
-static void iefhkrRsS_xattr(char c, t_flags *f) {
+static void ieGhkrRsS_xattr(char c, t_flags *f) {
+    if (c == 'G')
+        f->color = 1;
     if (c == 'i')
         f->inode = 1;
     if (c == 'e')
@@ -29,8 +33,6 @@ static void iefhkrRsS_xattr(char c, t_flags *f) {
         f->xattr = 1;
     else if (c == 'R')
         f->recursive = 1;
-    else if (c == 'f')
-        f->nosort = 1;
     else if (c == 'r')
         f->reversesort = 1;
     else if (c == 'S')
@@ -43,7 +45,7 @@ static void iefhkrRsS_xattr(char c, t_flags *f) {
         f->humanval = 1;
 }
 
-static void aAdLHP(char c, t_flags *f, int *fts_options) {
+static void adLHP(char c, t_flags *f, int *fts_options) {
     if (c == 'H')
         *fts_options |= MX_COMFOLLOW;
     else if (c == 'L') {
@@ -55,19 +57,18 @@ static void aAdLHP(char c, t_flags *f, int *fts_options) {
         *fts_options &= ~MX_LOGICAL;
         *fts_options |= MX_PHYSICAL;
     }
-    else if (c == 'a')
-        *fts_options |= MX_SEEDOT;
-    else if (c == 'A')
+    else if (c == 'a') {
         f->listdot = 1;
+        *fts_options |= MX_SEEDOT;
+    }
     else if (c == 'd') {
         f->listdir = 1;
         f->recursive = 0;
     }
 }
-
 void mx_parse_flag(char c, t_flags *f, int *fts_options) {
-    mx_bBcClqtTuUvwx1(c, f);
-    iefhkrRsS_xattr(c, f);
-    FGmnp(c, f);
-    aAdLHP(c, f, fts_options);
+    mx_bBcCflqtTuUvwx1(c, fts_options, f);
+    ieGhkrRsS_xattr(c, f);
+    AFmnp(c, f);
+    adLHP(c, f, fts_options);
 }

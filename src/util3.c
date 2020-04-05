@@ -31,6 +31,8 @@ short mx_fts_root_info(char *name, int options) {
         return MX_D;
     if(!MX_S_ISLNK(sst.st_mode))
         return MX_DEFAULT;
+    if (options & MX_COMFOLLOW && mx_link_info(name) == MX_DEFAULT)
+        return MX_LNF;
     if (options & (MX_COMFOLLOW | MX_LOGICAL)) {
         return mx_link_info(name);
     }
@@ -58,8 +60,8 @@ t_file *mx_root_file(char *name, int options) {
     np->level = MX_ROOTLEV;
     np->d_type = mx_type_stat(name);
     np->info = mx_fts_root_info(name, options);
-    stsp = malloc(sizeof(struct stat)); 
-    if (np->info == MX_SLNONE) 
+    stsp = malloc(sizeof(struct stat));
+    if (np->info == MX_SLNONE || np->info == MX_LNF)
         lstat(np->accpath, stsp);
     else
         (options & (MX_LOGICAL | MX_COMFOLLOW) ? stat

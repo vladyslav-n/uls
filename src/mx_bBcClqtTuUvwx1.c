@@ -68,7 +68,12 @@ static void bBqvw(char c, t_flags *f) {
     }
 }
 
-void mx_bBcClqtTuUvwx1(char c, t_flags *f) {
+void mx_bBcCflqtTuUvwx1(char c, int *fts_options, t_flags *f) {
+    if (c == 'f') {
+        f->listdot = 1;
+        *fts_options |= MX_SEEDOT;
+        f->nosort = 1;      
+    }
     bBqvw(c, f);
     ctTuU(c, f);
     Clx1(c, f);

@@ -21,4 +21,3 @@ char **mx_strsplit_ncount(const char *s, char c, int *count) {
     *count = words_count;
     return arr;
 }
-

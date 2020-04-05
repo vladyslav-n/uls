@@ -7,4 +7,3 @@ int mx_skip_untilchar_ncount(const char *str, char c, int *i) {
         count++;
     return count;
 }
-

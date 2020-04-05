@@ -8,7 +8,7 @@ SRCR = acc_stat_cmp.c \
 	display1.c \
 	fts.c \
 	fts_children.c \
-	ls.c \
+	main.c \
 	mx_bBcClqtTuUvwx1.c \
 	mx_display.c \
 	mx_getopt.c \
@@ -43,7 +43,8 @@ FLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 
 LIB = libmx/libmx.a
 
-all: install clean
+all: install
+	@make clean
 
 install: clean
 	@make -C libmx
@@ -57,9 +58,15 @@ uninstall: clean
 	@rm -rf $(NAME)
 
 clean:
+	@rm -rf uls.dSYM
 	@rm -rf $(OBJR)
 	@rm -rf obj/
 	@rm -rf libmx.a
 	@make uninstall -C libmx/
 
 reinstall: uninstall all
+
+debug: uninstall
+	@make -C libmx
+	@cp $(LIB) .
+	@clang $(FLAGS) $(LIB) $(SRC) -o $(NAME) --debug

@@ -6,4 +6,3 @@ bool mx_is_substr(const char *haystack, const char *needle) {
             return 0;
     return 1;
 }
-

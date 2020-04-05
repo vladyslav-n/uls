@@ -39,4 +39,3 @@ int mx_quicksort(char **arr, int left, int right) {
         count += mx_quicksort(arr, i, right);
     return count;
 }
-

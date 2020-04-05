@@ -5,4 +5,3 @@ void mx_skipchar(const char *str, char c, int *i) {
         (*i)++;
     }
 }
-

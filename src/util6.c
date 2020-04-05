@@ -46,7 +46,7 @@ char *mx_usrname(uid_t st_uid, char *user, t_flags *f) {
     if (f->numericonly)
         return mx_printbuf(user, mx_itoa(st_uid));
     passwd_ptr = getpwuid(st_uid);
-    if (passwd_ptr) 
+    if (passwd_ptr)
         return mx_printbuf(user, passwd_ptr->pw_name);
     return mx_printbuf(user, mx_itoa(st_uid));
 }
@@ -57,7 +57,7 @@ char *mx_grpname(gid_t st_gid, char *group, t_flags *f) {
     if (f->numericonly)
         return mx_printbuf(group, mx_itoa(st_gid));
     group_ptr = getgrgid(st_gid);
-    if (group_ptr) 
+    if (group_ptr)
         return mx_printbuf(group, group_ptr->gr_name);
     return mx_printbuf(group, mx_itoa(st_gid));
 }

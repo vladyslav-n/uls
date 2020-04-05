@@ -27,7 +27,7 @@ static void no_delim_found(t_tmp *tmp, t_str_len *tail, t_read_bytes *bytes) {
     tail->s = mx_strnew(0);
     tail->len = 0;
     if (tmp->flag == -1) {
-        tmp->flag = 3; 
+        tmp->flag = 3;
     }
 }
 
@@ -44,4 +44,3 @@ t_delim *del, t_read_bytes *bytes) {
     free(tmp->s);
     tmp->s = tail->s;
 }
-

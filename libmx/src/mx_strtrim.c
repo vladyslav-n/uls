@@ -28,4 +28,3 @@ char *mx_strtrim(const char *str) {
     }
     return mx_strndup(str + min_index, nul_index - min_index);
 }
-
