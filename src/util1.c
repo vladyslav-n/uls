@@ -1,5 +1,3 @@
-
-
 #include "../inc/uls.h"
 
 void mx_paste_node(t_list **list, void *data) {

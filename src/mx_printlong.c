@@ -27,7 +27,7 @@ void mx_printlong_mode_user_group(struct s_display *dp, t_flags *f, char *buf,
         mx_printchar(' ');
     }
     if (f->size) {
-        mx_print_align(mx_printbuf(buf, mx_llitoa(howmany(
+        mx_print_align(mx_printbuf(buf, mx_llitoa(MX_HOWMANY(
                         p->statp->st_blocks, f->blocksize))), dp->s_block, 1);
         mx_printchar(' ');
     }
@@ -95,7 +95,7 @@ void mx_printlong(struct s_display *dp, t_flags *f) {
 
     if (dp->list->level != MX_ROOTLEV && (f->longform || f->size)) {
         mx_printstr("total ");
-        mx_print_align(mx_printbuf(buf, mx_llitoa(howmany(
+        mx_print_align(mx_printbuf(buf, mx_llitoa(MX_HOWMANY(
                        dp->btotal, f->blocksize))), 0, 1);
         mx_printchar('\n');
     }

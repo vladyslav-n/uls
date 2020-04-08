@@ -54,6 +54,7 @@
 #define MX_PHYSICAL     0x010        /* physical walk */
 #define MX_SEEDOT       0x020        /* return dot and dot-dot */
 #define MX_NAMEONLY     0x100        /* (private) child names only */
+#define MX_ENOENT       0x200        /* to signal rval */
 
 #define MX_ROOTLEV      0
 
@@ -64,7 +65,7 @@
 #define MX_ERR          7        /* error; errno is set */
 #define MX_SLNONE      13        /* symbolic link without target */
 
-#define    FTS_ROOTLEVEL         0
+#define FTS_ROOTLEVEL         0
 
 #define MX_MAXUSRNAME         32
 #define MX_MAXGRPNAME         32
@@ -74,6 +75,8 @@
 #define MX_ROUND(n) n % 10 >= 5 ? (((n / 10) % 10) + 1) : ((n / 10) % 10)
 
 #define MX_ABS(x) ((x) < 0 ? -(x) : (x))
+
+#define MX_HOWMANY(x, y) ((((x) % (y)) == 0) ? ((x) / (y)) : (((x) / (y)) + 1))
 
 #define MX_ISDIR(m)     (((m) & S_IFMT) == S_IFDIR)
 #define MX_ISBLK(m)     (((m) & S_IFMT) == S_IFBLK)
@@ -94,36 +97,36 @@
  * represent a value of integral type t as a string, excluding the
  * NUL terminator, with provision for a sign.
  */
-#define MX_STRBUF_SIZEOF(t)    (1 + CHAR_BIT * sizeof(t) / 3 + 1)
+#define MX_STRBUF_SIZEOF(t) (1 + CHAR_BIT * sizeof(t) / 3 + 1)
 
 #define MX_PR_AL(b, n, w, r) mx_print_align(mx_printbuf(b, mx_llitoa(n)), w, r)
 
-#define MX_NO_PRINT    1
+#define MX_NO_PRINT 1
 
-#define MX_SIXMONTHS    ((365 / 2) * 86400)
+#define MX_SIXMONTHS ((365 / 2) * 86400)
 
 typedef enum {
     NONE, KILO, MEGA, GIGA, TERA, PETA, UNIT_MAX
 } unit_t;
 
 typedef struct s_ftsent {
-    u_short info;               /* flags for t_file structure */
-    char accpath[PATH_MAX + 1]; /* access path */
-    u_short accpathlen;         /* strlen(fts_accpath) */
+    u_short info;                   /* flags for t_file structure */
+    char accpath[PATH_MAX + 1];     /* access path */
+    u_short accpathlen;             /* strlen(fts_accpath) */
     char par_path[PATH_MAX + 1];    /* root path */
     u_short par_pathlen;            /* strlen(fts_path) */
-    char name[NAME_MAX + 1];    /* file name */
-    u_short namelen;            /* strlen(fts_name) */
-    short level;                /* depth (-1 to N) */
-    int f_errno;                  /* file errno */
-    long number;                /* local numeric value */
-    void *pointer;              /* local address value */
-    struct s_ftsent *parent;      /* parent directory */
-    struct s_ftsent *link;        /* next file structure */
-    struct s_ftsent *cycledir;       /* cycle structure */
-    struct stat *statp;         /* stat(2) information */
-    unsigned short fts_instr;    /* fts_set() instructions */
-    __uint8_t  d_type;               /* file type, see below */
+    char name[NAME_MAX + 1];        /* file name */
+    u_short namelen;                /* strlen(fts_name) */
+    short level;                    /* depth (-1 to N) */
+    int f_errno;                    /* file errno */
+    long number;                    /* local numeric value */
+    void *pointer;                  /* local address value */
+    struct s_ftsent *parent;        /* parent directory */
+    struct s_ftsent *link;          /* next file structure */
+    struct s_ftsent *cycledir;      /* cycle structure */
+    struct stat *statp;             /* stat(2) information */
+    unsigned short fts_instr;       /* fts_set() instructions */
+    __uint8_t  d_type;              /* file type, see below */
 }                t_file;
 
 typedef struct st_dirlist {
@@ -143,6 +146,7 @@ typedef struct s_fts {
     bool (*cmp)(void *, void *);
     int fts_options;
     char **argv;
+    bool enoent; // true if there is an ENOENT entry
 }                t_fts;
 
 /* ctime string time elements indexs */
@@ -159,18 +163,18 @@ enum e_timeind {
 
 /* Most of these are taken from <sys/stat.h> */
 enum e_colors {
-    C_DIR,            /* directory */
-    C_LNK,            /* symbolic link */
-    C_SOCK,            /* socket */
-    C_FIFO,            /* pipe */
-    C_EXEC,            /* executable */
-    C_BLK,            /* block special */
-    C_CHR,            /* character special */
-    C_SUID,            /* setuid executable */
-    C_SGID,            /* setgid executable */
-    C_WSDIR,        /* directory writeble to others, with sticky bit */
-    C_WDIR,            /* directory writeble to others, without st. bit */
-    C_NUMCOLORS        /* just a place-holder */
+    C_DIR,              /* directory */
+    C_LNK,              /* symbolic link */
+    C_SOCK,             /* socket */
+    C_FIFO,             /* pipe */
+    C_EXEC,             /* executable */
+    C_BLK,              /* block special */
+    C_CHR,              /* character special */
+    C_SUID,             /* setuid executable */
+    C_SGID,             /* setgid executable */
+    C_WSDIR,            /* directory writeble to others, with sticky bit */
+    C_WDIR,             /* directory writeble to others, without st. bit */
+    C_NUMCOLORS         /* just a place-holder */
 };
 
 typedef struct {
@@ -356,11 +360,11 @@ void mx_push_ftsent(t_ftslist **list, t_file *ptr);
 short mx_fts_push_name(t_ftslist **list, char *name, int options,
                        t_list **errlist);
 bool mx_str_cmp(void *a, void *b);
-void mx_print_errlist_names(t_list *errlist, bool sort);
-t_ftslist *mx_push_roots(t_ftslist **list, char **argv, int options,
+bool mx_print_errlist_names(t_list *errlist, bool sort);
+t_ftslist *mx_push_roots(t_ftslist **list, char **argv, int *options,
                          bool (*cmp)(void *, void *));
 t_file *mx_argv_chlist(char **argv, int options,
-                          bool (*cmp)(void *, void *));
+                       bool (*cmp)(void *, void *));
 t_fts *mx_fts_open(char **path_argv, int options,
                    bool (*cmp)(void *, void *));
 t_file *mx_fts_read(t_fts *ftsp);

@@ -41,6 +41,8 @@ t_fts *mx_traverse_display_print(int argc, char *argv[], int options,
         ftsp = mx_traverse(argc, argv, options, f);
     else
         ftsp = mx_traverse(1, f->dotav, options, f);
+    if (ftsp->enoent)
+        f->rval = 1;
     // system("leaks -q uls");
     exit(f->rval);
 }

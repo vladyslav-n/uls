@@ -1,7 +1,7 @@
 #include "../inc/uls.h"
 
 t_file *mx_argv_chlist(char **argv, int options,
-                          bool (*cmp)(void *, void *)) {
+                       bool (*cmp)(void *, void *)) {
     t_file *last_child = NULL;
     t_file *ch_list_start = NULL;
     char *name;
@@ -19,10 +19,12 @@ t_file *mx_argv_chlist(char **argv, int options,
 }
 
 t_fts *mx_fts_open(char **path_argv, int options,
-                 bool (*cmp)(void *, void *)) {
+                   bool (*cmp)(void *, void *)) {
     t_fts *ftsp = (t_fts *)mx_nalloc(sizeof(t_fts));
 
-    mx_push_roots(&ftsp->head, path_argv, options, cmp);
+    mx_push_roots(&ftsp->head, path_argv, &options, cmp);
+    if (options & MX_ENOENT)
+        ftsp->enoent = 1;
     ftsp->cur = ftsp->head;
     ftsp->cmp = cmp;
     ftsp->fts_options = options;

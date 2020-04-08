@@ -83,13 +83,14 @@ OBJ = $(addprefix obj/, $(OBJR))
 
 FLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 
-all: install clean
+all: install
 
 install: clean
 	@mkdir obj
 	@clang $(FLAGS) -c $(SRC)
 	@mv $(OBJR) obj
 	@ar -rcs $(NAME) $(OBJ)
+	@make clean
 
 uninstall: clean
 	@rm -rf $(NAME)
@@ -98,4 +99,4 @@ clean:
 	@rm -rf ./obj
 	@rm -rf $(OBJR)
 
-reinstall: uninstall all
+reinstall: uninstall install

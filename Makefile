@@ -44,27 +44,26 @@ FLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 LIB = libmx/libmx.a
 
 all: install
-	@make clean
 
 install: clean
 	@make -C libmx
-	@cp $(LIB) .
 	@mkdir obj
 	@clang $(FLAGS) -c $(SRC)
 	@mv $(OBJR) obj
 	@clang $(FLAGS) $(OBJ) $(LIB) -o $(NAME)
+	@make clean
 
 uninstall: clean
 	@rm -rf $(NAME)
+	@make uninstall -C libmx/
 
 clean:
 	@rm -rf uls.dSYM
 	@rm -rf $(OBJR)
 	@rm -rf obj/
-	@rm -rf libmx.a
-	@make uninstall -C libmx/
+	@make clean -C libmx/
 
-reinstall: uninstall all
+reinstall: uninstall install
 
 debug: uninstall
 	@make -C libmx

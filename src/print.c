@@ -26,7 +26,7 @@ int mx_printname(t_file *p, u_long inodefield, u_long sizefield, t_flags *f) {
                                             inodefield, 1);
     if (f->size)
         chcnt += mx_print_align(mx_printbuf(buf, mx_llitoa(
-            howmany(p->statp->st_blocks, f->blocksize))), sizefield, 1);
+            MX_HOWMANY(p->statp->st_blocks, f->blocksize))), sizefield, 1);
     if (f->inode || f->size)
         mx_printchar(' ');
     if (f->color)

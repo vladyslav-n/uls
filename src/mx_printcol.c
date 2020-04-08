@@ -1,6 +1,5 @@
 #include "../inc/uls.h"
 
-
 static void print_column(struct s_display *dp, t_flags *f, t_col_param *c,
                          t_file **array) {
     c->chcnt = 0;
@@ -32,7 +31,7 @@ static void print(struct s_display *dp, t_flags *f, t_col_param *c,
         c->numrows++;
     if (dp->list->level != MX_ROOTLEV && (f->longform || f->size)){
         mx_printstr("total ");
-        mx_print_align(mx_printbuf(c->buf, mx_llitoa(howmany(
+        mx_print_align(mx_printbuf(c->buf, mx_llitoa(MX_HOWMANY(
                        dp->btotal, f->blocksize))), 0, 1);
         mx_printchar('\n');
     }

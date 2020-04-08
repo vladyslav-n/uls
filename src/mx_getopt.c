@@ -1,5 +1,3 @@
-
-
 #include "../inc/uls.h"
 
 static char optchar(char *optstring, bool *wordbeg, int *optind, char **c) {
